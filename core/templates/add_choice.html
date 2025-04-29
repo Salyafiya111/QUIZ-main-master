@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Добавить вариант ответа{% endblock %}
+
+{% block content %}
+<h1>Добавить вариант ответа</h1>
+<p>К опросу: <strong>{{ poll_id }}</strong></p>
+
+<form method="POST" action="{{ url_for('main.add_choice', poll_id=poll_id) }}">
+    <div class="form-group">
+        <label for="choice_text">Текст варианта ответа</label>
+        <input type="text" class="form-control" id="choice_text" name="choice_text" required maxlength="200" />
+    </div>
+    <button type="submit" class="btn btn-success">Добавить вариант</button>
+    <a href="{{ url_for('main.take_poll', poll_id=poll_id) }}" class="btn btn-secondary ml-2">Назад к опросу</a>
+</form>
+{% endblock %}

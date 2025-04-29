@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Результаты: {{ poll.title }}{% endblock %}
+
+{% block content %}
+<h1>Результаты опроса: {{ poll.title }}</h1>
+<p>{{ poll.description or "Описание отсутствует" }}</p>
+
+<table class="table table-bordered mt-4">
+    <thead class="thead-light">
+        <tr>
+            <th>Вариант ответа</th>
+            <th>Голоса</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for choice in choices %}
+        <tr>
+            <td>{{ choice.choice_text }}</td>
+            <td>{{ choice.votes }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('main.take_poll', poll_id=poll.id) }}" class="btn btn-primary">Проголосовать ещё раз</a>
+<a href="{{ url_for('main.index') }}" class="btn btn-secondary ml-2">На главную</a>
+{% endblock %}

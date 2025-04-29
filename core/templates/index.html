@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Список опросов</h1>
+{% if polls %}
+  <ul>
+  {% for poll in polls %}
+    <li><a href="{{ url_for('main.take_poll', poll_id=poll.id) }}">{{ poll.title }}</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>Пока нет опросов.</p>
+{% endif %}
+{% endblock %}

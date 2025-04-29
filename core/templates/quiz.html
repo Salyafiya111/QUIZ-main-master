@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ poll.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ poll.title }}</h1>
+<p>{{ poll.description or "Описание отсутствует" }}</p>
+
+<form method="POST" action="{{ url_for('main.take_poll', poll_id=poll.id) }}">
+    {% for choice in choices %}
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="choice" id="choice{{ choice.id }}" value="{{ choice.id }}" required>
+            <label class="form-check-label" for="choice{{ choice.id }}">{{ choice.choice_text }}</label>
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary mt-3">Проголосовать</button>
+</form>
+
+<a href="{{ url_for('main.add_choice', poll_id=poll.id) }}" class="btn btn-link mt-3">Добавить вариант ответа</a>
+{% endblock %}
